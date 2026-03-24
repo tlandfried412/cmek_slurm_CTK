@@ -309,6 +309,12 @@ variable "source_image" {
 # DISK #
 ########
 
+variable "disk_encryption_key" {
+  description = "KMS key self link for controller boot disk encryption."
+  type        = string
+  default     = null
+}
+
 variable "disk_type" {
   type        = string
   description = "Boot disk type, can be either pd-ssd, local-ssd, or pd-standard."

@@ -219,6 +219,7 @@ locals {
 
 resource "terraform_data" "machine_type_zone_validation" {
   input = var.machine_type
+  
   lifecycle {
     precondition {
       condition     = length(local.zones_with_machine_type) > 0

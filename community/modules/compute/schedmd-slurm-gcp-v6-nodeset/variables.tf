@@ -51,6 +51,12 @@ variable "node_count_dynamic_max" {
   default     = 10
 }
 
+variable "disk_encryption_key" {
+  description = "KMS encryption key self-link for boot disk of instances."
+  type        = string
+  default     = null
+}
+
 ## VM Definition
 variable "instance_template" { # tflint-ignore: terraform_unused_declarations
   description = "DEPRECATED: Instance template can not be specified for compute nodes."

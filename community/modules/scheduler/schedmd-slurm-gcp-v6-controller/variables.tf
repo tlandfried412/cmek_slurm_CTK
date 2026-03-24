@@ -18,6 +18,12 @@
 # GENERAL #
 ###########
 
+variable "bucket_kms_key_name" {
+  description = "The KMS key name to use for bucket encryption. If not provided, Google-managed encryption will be used."
+  type        = string
+  default     = null
+}
+
 variable "project_id" {
   type        = string
   description = "Project ID to create resources in."
@@ -752,6 +758,12 @@ variable "gcloud_path_override" {
   type        = string
   default     = ""
   nullable    = false
+}
+
+variable "disk_encryption_key" {
+  description = "KMS encryption key self-link for boot disk of instances."
+  type        = string
+  default     = null
 }
 
 # DEPRECATED VARIABLES

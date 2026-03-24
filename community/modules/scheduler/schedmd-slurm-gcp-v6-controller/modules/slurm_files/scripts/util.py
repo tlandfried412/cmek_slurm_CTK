@@ -475,6 +475,9 @@ def should_mount_slurm_bucket() -> bool:
     except MetadataNotFoundError:
         return False
 
+def blob_fetch(file):
+    bucket_name, _ = _get_bucket_and_common_prefix()
+    return storage_client().get_bucket(bucket_name).get_blob(file)
 
 def _get_bucket_and_common_prefix() -> Tuple[str, str]:
     uri = instance_metadata("attributes/slurm_bucket_path")
@@ -661,10 +664,17 @@ class _ConfigBlobs:
         all = [self.core] + self.partition + self.nodeset + self.nodeset_dyn + self.nodeset_tpu
         if self.controller_addr:
             all.append(self.controller_addr)
-    
+
         # sort blobs so hash is consistent
         for blob in sorted(all, key=lambda b: b.name):
-            h.update(blob.md5_hash.encode("utf-8"))
+           # if blob.md5_hash is None:
+           #     print("+++ The blob failed to hash, I'm going home: {0}".format(blob))
+           #     #h.update(blob.reload().md5_hash.encode("utf-8"))
+           #     #h.update(blob_get(blob.name).md5_hash.encode("utf-8"))
+           # else:
+           #     print("+++ The hash has blobbed: {0}".format(blob))
+           #     h.update(blob.md5_hash.encode("utf-8"))
+           h.update((blob_fetch(blob.name).md5_hash if blob.md5_hash is None else blob.md5_hash).encode("utf-8"))           
         return h.hexdigest()
 
 @dataclass

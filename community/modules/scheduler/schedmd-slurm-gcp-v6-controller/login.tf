@@ -44,6 +44,7 @@ module "login" {
 
   universe_domain = var.universe_domain
 
+  
   # trigger replacement of login nodes when the controller instance is replaced
   # Needed for re-mounting volumes hosted on controller
   replace_trigger = google_compute_instance_from_template.controller.self_link

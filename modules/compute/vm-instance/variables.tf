@@ -56,6 +56,12 @@ variable "disk_type" {
   default     = "pd-standard"
 }
 
+variable "disk_encryption_key" {
+  description = "KMS encryption key self-link for boot disk of instances"
+  type        = string
+  default     = null
+}
+
 variable "auto_delete_boot_disk" {
   description = "Controls if boot disk should be auto-deleted when instance is deleted."
   type        = bool

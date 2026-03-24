@@ -49,6 +49,12 @@ variable "exclusive" {
   default     = true
 }
 
+variable "disk_encryption_key" {
+  description = "KMS encryption key self-link for boot disk of instances."
+  type        = string
+  default     = null
+}
+
 variable "nodeset" {
   description = <<-EOD
   A list of nodesets.

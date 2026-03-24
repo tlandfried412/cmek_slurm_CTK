@@ -71,6 +71,12 @@ variable "disk_auto_delete" {
   default     = true
 }
 
+variable "disk_encryption_key" {
+  description = "KMS encryption key self-link for boot disk of instances."
+  type        = string
+  default     = null
+}
+
 variable "disk_labels" {
   description = "Labels specific to the boot disk. These will be merged with var.labels."
   type        = map(string)

@@ -71,6 +71,14 @@ resource "google_compute_disk" "controller_disk" {
   type    = var.controller_state_disk.type
   size    = var.controller_state_disk.size
   zone    = var.zone
+  
+  # Customer-managed encryption key
+  dynamic "disk_encryption_key" {
+    for_each = var.disk_encryption_key != null ? [1] : []
+    content {
+      kms_key_self_link = var.disk_encryption_key
+    }
+  }
 }
 
 # INSTANCE TEMPLATE
@@ -154,6 +162,8 @@ resource "google_compute_instance_from_template" "controller" {
       network_attachment = var.controller_network_attachment
     }
   }
+  
+  
 }
 
 moved {
