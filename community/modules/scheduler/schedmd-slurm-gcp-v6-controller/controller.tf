@@ -30,6 +30,7 @@ locals {
       auto_delete                = ad.auto_delete
       boot                       = ad.boot
       disk_resource_manager_tags = ad.disk_resource_manager_tags
+      disk_encryption_key        = ad.disk_encryption_key
     }
   ]
 
@@ -97,6 +98,7 @@ module "slurm_controller_template" {
   disk_type                  = var.disk_type
   disk_resource_manager_tags = var.disk_resource_manager_tags
   additional_disks           = concat(local.additional_disks, local.state_disk)
+  disk_encryption_key        = var.disk_encryption_key
 
   bandwidth_tier            = var.bandwidth_tier
   slurm_bucket_path         = module.slurm_files.slurm_bucket_path

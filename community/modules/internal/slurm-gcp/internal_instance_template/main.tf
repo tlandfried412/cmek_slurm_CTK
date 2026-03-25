@@ -37,6 +37,7 @@ locals {
       auto_delete                = var.auto_delete
       disk_resource_manager_tags = var.disk_resource_manager_tags
       boot                       = "true"
+      disk_encryption_key        = var.disk_encryption_key
     },
   ]
 
@@ -111,7 +112,7 @@ resource "google_compute_instance_template" "tpl" {
       resource_manager_tags = lookup(disk.value, "disk_resource_manager_tags", {})
 
       dynamic "disk_encryption_key" {
-        for_each = compact([var.disk_encryption_key == null ? null : 1])
+        for_each = lookup(disk.value, "disk_encryption_key", null) != null ? [lookup(disk.value, "disk_encryption_key", null)] : (var.disk_encryption_key != null ? [var.disk_encryption_key] : []
         content {
           kms_key_self_link = var.disk_encryption_key
         }

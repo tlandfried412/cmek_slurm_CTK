@@ -198,6 +198,7 @@ variable "additional_disks" {
     disk_type                  = optional(string)
     disk_labels                = map(string)
     disk_resource_manager_tags = map(string)
+    disk_encryption_key        = optional(string)
   }))
   default = []
 }

@@ -364,6 +364,7 @@ variable "additional_disks" {
     auto_delete                = bool
     boot                       = bool
     disk_resource_manager_tags = optional(map(string))
+    disk_encryption_key        = optional(string)
   }))
   description = "List of maps of disks."
   default     = []

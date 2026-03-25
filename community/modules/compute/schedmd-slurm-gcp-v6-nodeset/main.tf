@@ -53,6 +53,7 @@ locals {
       auto_delete                = ad.auto_delete
       boot                       = ad.boot
       disk_resource_manager_tags = ad.disk_resource_manager_tags
+      disk_encryption_key        = ad.disk_encryption_key
     }
   ]
 
@@ -84,6 +85,7 @@ locals {
     disk_type                  = var.disk_type
     disk_resource_manager_tags = var.disk_resource_manager_tags
     additional_disks           = local.additional_disks
+    disk_encryption_key        = var.disk_encryption_key
 
     bandwidth_tier = var.bandwidth_tier
     can_ip_forward = var.can_ip_forward

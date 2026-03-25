@@ -191,6 +191,7 @@ variable "additional_disks" {
     auto_delete                = optional(bool)
     boot                       = optional(bool)
     disk_resource_manager_tags = optional(map(string))
+    disk_encryption_key        = optional(string)
   }))
   default = []
 }
