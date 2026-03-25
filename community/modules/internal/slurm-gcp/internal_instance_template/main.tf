@@ -112,7 +112,7 @@ resource "google_compute_instance_template" "tpl" {
       resource_manager_tags = lookup(disk.value, "disk_resource_manager_tags", {})
 
       dynamic "disk_encryption_key" {
-        for_each = lookup(disk.value, "disk_encryption_key", null) != null ? [lookup(disk.value, "disk_encryption_key", null)] : (var.disk_encryption_key != null ? [var.disk_encryption_key] : []
+        for_each = lookup(disk.value, "disk_encryption_key", null) != null ? [lookup(disk.value, "disk_encryption_key", null)] : var.disk_encryption_key != null ? [var.disk_encryption_key] : []
         content {
           kms_key_self_link = var.disk_encryption_key
         }
