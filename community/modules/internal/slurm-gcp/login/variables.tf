@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+variable "disk_encryption_key" {
+  description = "CMEK key to use for disk encryption."
+  type        = string
+  default     = null
+}
+
 variable "project_id" {
   type        = string
   description = "Project ID to create resources in."
@@ -62,6 +68,7 @@ variable "login_nodes" {
       auto_delete                = optional(bool, true)
       boot                       = optional(bool, false)
       disk_resource_manager_tags = optional(map(string), {})
+      disk_encryption_key        = optional(string)
     })), [])
     additional_networks = optional(list(object({
       access_config = optional(list(object({
@@ -90,6 +97,7 @@ variable "login_nodes" {
     disk_resource_manager_tags = optional(map(string), {})
     disk_size_gb               = optional(number)
     disk_type                  = optional(string, "n1-standard-1")
+    disk_encryption_key        = optional(string)
     enable_confidential_vm     = optional(bool, false)
     enable_oslogin             = optional(bool, true)
     enable_shielded_vm         = optional(bool, false)
